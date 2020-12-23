@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入外部配置文件-->
+    <properties resource="db.properties"/>
+
+    <settings>
+        <!--标准的日志工厂实现-->
+<!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <!--
+            使用log4j：
+            第一步：导入依赖包
+
+        -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--是否开启驼峰命名映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--给实体类起别名-->
+    <typeAliases>
+        <package name="com.atlgq.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+<!--    <mappers>-->
+<!--        <mapper resource="com/atlgq/dao/UserMapper.xml"/>-->
+<!--    </mappers>-->
+
+    <!--绑定接口-->
+<!--    <mappers>-->
+<!--        <mapper class="com.atlgq.dao.UserMapper"></mapper>-->
+<!--    </mappers>-->
+    <!--通过package把dao包下面的xml文件注入到核心文件中-->
+    <mappers><package name="com.atlgq.dao"/>
+    </mappers>
+</configuration>
